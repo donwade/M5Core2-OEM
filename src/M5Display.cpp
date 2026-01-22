@@ -1,3 +1,4 @@
+#include "WiFi.h"
 #include "M5Display.h"
 
 #ifdef M5Stack_M5Core2
@@ -13,15 +14,20 @@ M5Display::M5Display() : TFT_eSPI() {
     if (!instance) instance = this;
 }
 
+const int frequency = 5000; // 5 kHz
+const int resolution = 8; // 8-bit resolution (0-255)
+const int ledPin = 18;
+
 void M5Display::begin() {
     TFT_eSPI::begin();
     setRotation(1);
     fillScreen(0);
 
-    // Init the back-light LED PWM
-    ledcSetup(BLK_PWM_CHANNEL, 44100, 8);
+    ledcAttach(ledPin, frequency, resolution);
+    //// Init the back-light LED PWM
+    ///ledcSetup(BLK_PWM_CHANNEL, 44100, 8);
     // ledcAttachPin(TFT_BL, BLK_PWM_CHANNEL);
-    ledcWrite(BLK_PWM_CHANNEL, 80);
+    ///ledcWrite(BLK_PWM_CHANNEL, 80);
 }
 
 void M5Display::sleep() {

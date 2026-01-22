@@ -1,6 +1,6 @@
 #ifndef __AXP_PMIC_H__
 #define __AXP_PMIC_H__
-
+#include <cstdint>
 #include <Wire.h>
 #include <Arduino.h>
 
